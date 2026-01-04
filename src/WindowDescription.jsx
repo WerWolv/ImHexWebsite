@@ -20,7 +20,7 @@ function WindowDescription() {
                         </button>
                     </a>
                 </div>
-                <img className={"imhex-web-arrow"} src={"src/assets/arrow.png"} style={{ marginLeft: "-10px", paddingTop: "10px", width: "80%" }} />
+                <img className={"imhex-web-arrow"} src={"assets/arrow.png"} style={{ marginLeft: "-10px", paddingTop: "10px", width: "80%" }} />
             </div>
         </>
     )
