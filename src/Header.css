@@ -1,0 +1,30 @@
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: #404040 solid 1px;
+    width: calc(100% - 100px);
+    height: 50px;
+    margin: auto 50px;
+    text-align: center;
+    align-content: center;
+}
+
+.header-icon {
+    color: white;
+}
+
+.header-icon:hover {
+    transform: scale(1.1);
+}
+
+.header-item-start {
+    float: left;
+
+}
+
+.header-item-end {
+    float: right;
+    margin-top: 6px;
+    margin-right: 25px;
+}

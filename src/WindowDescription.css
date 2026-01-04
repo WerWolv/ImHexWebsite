@@ -1,0 +1,18 @@
+.imhex-web-description {
+    @media(width > 1500px) {
+        position: absolute;
+        width: 250px;
+        right: -300px;
+        top: 200px;
+    }
+    @media(width <= 1500px) {
+        display: none;
+    }
+}
+
+.imhex-web-box {
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
