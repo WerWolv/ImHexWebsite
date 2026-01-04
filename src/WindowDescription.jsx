@@ -1,6 +1,7 @@
 import "./WindowDescription.css"
 import React from "react";
 import {ArrowUpLeftFromSquareIcon} from "lucide-react";
+import arrowImage from "./assets/arrow.png";
 
 function WindowDescription() {
     return (
@@ -20,7 +21,7 @@ function WindowDescription() {
                         </button>
                     </a>
                 </div>
-                <img className={"imhex-web-arrow"} src={"assets/arrow.png"} style={{ marginLeft: "-10px", paddingTop: "10px", width: "80%" }} />
+                <img className={"imhex-web-arrow"} src={arrowImage} style={{ marginLeft: "-10px", paddingTop: "10px", width: "80%" }} />
             </div>
         </>
     )
