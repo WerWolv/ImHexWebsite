@@ -8,6 +8,7 @@ const DownloadButtons = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
     const [releases, setReleases] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [switching, setSwitching] = useState(false);
     const [error, setError] = useState(null);
     const [buildType, setBuildType] = useState('stable'); // 'stable' or 'nightly'
     const [hoveredDropdown, setHoveredDropdown] = useState(null);
@@ -44,7 +45,13 @@ const DownloadButtons = () => {
     }, [openDropdown]);
 
     const fetchLatestRelease = async () => {
-        setLoading(true);
+        const isInitialLoad = releases === null;
+        if (isInitialLoad) {
+            setLoading(true);
+        } else {
+            setSwitching(true);
+        }
+        
         try {
             const tag = buildType === 'nightly' ? 'tags/nightly' : 'latest';
             const response = await fetch(`https://api.github.com/repos/WerWolv/ImHex/releases/${tag}`, {
@@ -61,10 +68,12 @@ const DownloadButtons = () => {
             const data = await response.json();
             setReleases(data);
             setLoading(false);
+            setSwitching(false);
         } catch (err) {
             console.error('Fetch error:', err);
             setError(err.message);
             setLoading(false);
+            setSwitching(false);
         }
     };
 
@@ -331,29 +340,36 @@ const DownloadButtons = () => {
             </div>
 
             {/* Build Type Slider */}
-            <div className="flex items-center gap-3 bg-gray-800 p-1.5 rounded-xl border border-gray-700">
+            <div className="flex items-center gap-3 bg-gray-800 p-1.5 rounded-xl border border-gray-700 relative">
                 <button
                     onClick={() => setBuildType('stable')}
+                    disabled={switching}
                     className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all duration-200 ${
                         buildType === 'stable'
                             ? 'bg-blue-600 text-white shadow-lg'
                             : 'text-gray-400 hover:text-gray-200'
-                    }`}
+                    } ${switching ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                     <Sun className="w-4 h-4" />
                     <span>Stable Release</span>
                 </button>
                 <button
                     onClick={() => setBuildType('nightly')}
+                    disabled={switching}
                     className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all duration-200 ${
                         buildType === 'nightly'
                             ? 'bg-purple-600 text-white shadow-lg'
                             : 'text-gray-400 hover:text-gray-200'
-                    }`}
+                    } ${switching ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                     <Moon className="w-4 h-4" />
                     <span>Nightly Build</span>
                 </button>
+                {switching && (
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                        <Loader2 className="w-5 h-5 animate-spin text-blue-400" />
+                    </div>
+                )}
             </div>
 
             {/* Primary Download Button */}
