@@ -24,6 +24,8 @@ const DownloadButtons = () => {
         // Detect architecture
         if (userAgent.includes('arm') || userAgent.includes('aarch64')) {
             setDetectedArch('arm');
+        } else if (userAgent.includes("Intel") || userAgent.includes("x86")) {
+            setDetectedArch('x86');
         }
 
         // Fetch latest release from GitHub
