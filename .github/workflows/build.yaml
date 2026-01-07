@@ -33,6 +33,15 @@ jobs:
         working-directory: .
         run: npm ci
 
+      - name: Download ImHex Web
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: 'WerWolv/ImHex'
+          tag: 'nightly'
+          fileName: '*-Web.zip'
+          extract: true
+          out-file-path: 'public'
+
       - name: Build
         working-directory: .
         run: npm run build
