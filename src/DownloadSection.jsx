@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Icon, Square, Download, ChevronDown, Loader2, Grid2x2, Apple, Moon, Sun} from 'lucide-react';
+import {Icon, Square, Download, ChevronDown, Loader2, Grid2x2, Apple, Moon, Sun, Globe2, GithubIcon} from 'lucide-react';
 import { penguin } from '@lucide/lab';
 
 const DownloadButtons = () => {
@@ -566,8 +566,54 @@ const DownloadButtons = () => {
                 )}
             </div>
 
+            <div className={"flex flex-wrap gap-4 justify-center max-w-4xl"}>
+                <a href={(() => {
+                    let imhexWebUrl = "https://web.imhex.werwolv.net";
+                    if (releases.tag_name === 'nightly')
+                        imhexWebUrl += "/nightly";
+
+                    return imhexWebUrl;
+                })()}>
+                    <div
+                        className="relative"
+                    >
+                        <button
+                            onMouseEnter={() => setHoveredDropdown('web')}
+                            onMouseLeave={() => setHoveredDropdown(null)}
+                            className={`flex items-center gap-2 px-5 py-3 bg-gray-800 border-2 rounded-lg font-medium text-gray-200 transition-all duration-200 ${
+                                hoveredDropdown === 'web'
+                                    ? 'border-gray-500 shadow-lg transform scale-105'
+                                    : 'border-gray-700 hover:border-gray-600'
+                            }`}
+                        >
+                            <Globe2 className="w-5 h-5" />
+                            <span>Web Build</span>
+                        </button>
+                    </div>
+                </a>
+
+                <a href={"https://github.com/WerWolv/ImHex"}>
+                    <div
+                        className="relative"
+                    >
+                        <button
+                            onMouseEnter={() => setHoveredDropdown('source')}
+                            onMouseLeave={() => setHoveredDropdown(null)}
+                            className={`flex items-center gap-2 px-5 py-3 bg-gray-800 border-2 rounded-lg font-medium text-gray-200 transition-all duration-200 ${
+                                hoveredDropdown === 'source'
+                                    ? 'border-gray-500 shadow-lg transform scale-105'
+                                    : 'border-gray-700 hover:border-gray-600'
+                            }`}
+                        >
+                            <GithubIcon className="w-5 h-5" />
+                            <span>Source Code</span>
+                        </button>
+                    </div>
+                </a>
+            </div>
+
             {/* Additional Info */}
-            <div className="text-center mt-4">
+            <div className="text-center mt-3">
                 <a
                     href={releases.html_url}
                     target="_blank"
@@ -577,6 +623,7 @@ const DownloadButtons = () => {
                     View full release notes on GitHub
                 </a>
             </div>
+
         </div>
     );
 };
