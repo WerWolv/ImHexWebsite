@@ -22,7 +22,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        repository: ${{ github.repository_owner }}/ImHexWebsite
+        with:
+          repository: ${{ github.repository_owner }}/ImHexWebsite
 
       - name: Setup Node
         uses: actions/setup-node@v4
