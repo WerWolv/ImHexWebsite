@@ -1,5 +1,6 @@
 import "./Window.css"
 import WindowDescription from "./WindowDescription.jsx";
+import fallbackImage from "./assets/screenshot.png";
 
 import { useEffect, useRef } from 'react';
 
@@ -55,7 +56,8 @@ function Window() {
             <div className={"window-frame"}>
                 <div className={"window-frame-inner"}>
                     <div className="imhex-web-canvas-wrapper" onClick={onWindowClicked}>
-                        <canvas width={0} height={0} className="imhex-web-canvas" id="canvas" ref={canvasRef} onContextMenu={event?.preventDefault()}></canvas>
+                        <img className={"imhex-web-fallback-image"} src={fallbackImage} />
+                        <canvas className="imhex-web-canvas" id="canvas" ref={canvasRef} onContextMenu={event?.preventDefault()}></canvas>
                     </div>
                     <div className={"window-frame-controls"}>
                         <svg className={"window-frame-svg"}>
