@@ -55,7 +55,7 @@ function Window() {
         <>
             <div className={"window-frame"}>
                 <div className={"window-frame-inner"}>
-                    <div className="imhex-web-canvas-wrapper" onClick={onWindowClicked}>
+                    <div className="imhex-web-canvas-wrapper" id="canvas-wrapper" onClick={onWindowClicked}>
                         <img className={"imhex-web-fallback-image"} src={fallbackImage} />
                         <canvas className="imhex-web-canvas" id="canvas" ref={canvasRef} onContextMenu={event?.preventDefault()}></canvas>
                     </div>
