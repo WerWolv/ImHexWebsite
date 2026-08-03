@@ -28,6 +28,10 @@ const DownloadButtons = () => {
             setDetectedArch('x86');
         }
 
+        // macOS lies about the architecture in its useragent
+        if (userAgent.includes('mac'))
+            setDetectedArch('arm')
+
         // Fetch latest release from GitHub
         fetchLatestRelease();
     }, [buildType]);
