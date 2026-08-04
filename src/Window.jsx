@@ -4,14 +4,14 @@ import fallbackImage from "./assets/screenshot.png";
 
 import { useEffect, useRef } from 'react';
 
-function loadLibrary(src, doAsync) {
+function loadLibrary(src, doAsync, onLoad) {
     const script = document.createElement('script');
     script.src = src;
     script.async = doAsync;
+    script.onload = onLoad;
 
     document.body.appendChild(script);
-
-    return script
+    return script;
 }
 
 function onWindowClicked() {
@@ -40,8 +40,10 @@ function Window() {
             }
             scriptLoadedRef.current = true;
 
-            wasmConfig = loadLibrary("wasm-config.js", false);
-            imhexWasm = loadLibrary("imhex.js", true);
+            wasmConfig = loadLibrary("wasm-config.js", false, () => {
+                window.Module["arguments"].push("--scaling", (window.devicePixelRatio * 0.4).toString());
+                imhexWasm = loadLibrary("imhex.js", true);
+            });
         });
         return () => {
             if (imhexWasm != null)
